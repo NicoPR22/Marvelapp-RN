@@ -1,4 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './components/home/Home';
+import Detail from './components/detail/Detail';
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Detail" component={Detail} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+/*import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
@@ -18,3 +37,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/
