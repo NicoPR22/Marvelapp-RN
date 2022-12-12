@@ -31,8 +31,14 @@ export default function Detail({ route }) {
     return (
       <Tab.Navigator
         initialRouteName="Information"
-        tabBarOptions={{
-          activeTintColor: 'darkred'
+        screenOptions={{
+          "tabBarActiveTintColor": "darkred",
+          "tabBarStyle": [
+            {
+              "display": "flex"
+            },
+            null
+          ]
         }}
       >
         <Tab.Screen 
@@ -50,13 +56,13 @@ export default function Detail({ route }) {
                   image={`${data?.thumbnail?.path}.${data.thumbnail.extension}`}
                   name={data.name}
                   description={data.description} 
+                  id={route.params.id}
                 />
             )
           }
         </Tab.Screen>
         <Tab.Screen 
           name="Comics" 
-          //component={Comics} 
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="book" color={color} size={size} />

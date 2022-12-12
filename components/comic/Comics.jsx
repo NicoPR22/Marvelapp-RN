@@ -9,7 +9,7 @@ export default function Comics({ listComics }) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const { ts, apikey, hash, baseURL } = apiParams;
+  const { ts, apikey, hash } = apiParams;
 
   useEffect(() => {
     const promisesArray = listComics.map(c => (
@@ -46,13 +46,7 @@ export default function Comics({ listComics }) {
               name={item.title} 
               image={`${item?.thumbnail?.path}.${item.thumbnail.extension}`} />
             )}
-          />) /*data.map(c => (
-            <Comic 
-              key={c.id}
-              name={c.title} 
-              image={`${c?.thumbnail?.path}.${c.thumbnail.extension}`}  
-            />
-          ))*/
+          />) 
       }
     </View>
   )

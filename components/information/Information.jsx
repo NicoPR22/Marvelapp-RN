@@ -1,44 +1,54 @@
-import { Text, View, Image, StyleSheet} from 'react-native';
+import { View, StyleSheet, ScrollView } from "react-native";
+import { Card, Title, Paragraph } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 50
+    display:'flex',
+    alignItems:"center",
+    width: "100%",
+    height:'100%'
   },
   name: {
     textAlign: "center",
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   image: {
-    width: "100%",
-    height: 200,
+    width: "95%",
+    height: 400,
   },
   description: {
-    //flex: 0.3,
-    backgroundColor: "pink",
     borderWidth: 1,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     padding: 15,
     borderColor: "black",
     borderBottomWidth: 1,
-    textAlign:"justify"
+    textAlign: "justify",
+  },
+  card:{
+    width:'95%',
+    marginVertical: 10
   }
 });
 
-export default function Information({ image, name, description }) {
-    return (
-      <View style={{padding: 5}}>
-        <Image 
-          style={styles.image}
-          source={{uri: image}}
-        />
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.description}>{description? description : 'N/A'}</Text>
-      </View>
-    )
-  }
+export default function Information({ image, name, description, id }) {
+  return (
+    <ScrollView>
+    <View style={styles.container}>
+    <Card mode="outlined"  style={styles.card}>
+      <Card.Cover source={{uri: image}} />
+      <Card.Title
+        title={name}
+        subtitle={`Id: ${id}`} 
+      />
+      <Card.Content>
+        <Title>Desrciption</Title>
+        <Paragraph>{description? description : 'N/A'}</Paragraph>
+      </Card.Content>
+    </Card>
+
+    </View>
+    </ScrollView>
+  );
+} 
