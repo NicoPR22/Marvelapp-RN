@@ -36,7 +36,7 @@ export default function Information({ image, name, description, id }) {
   return (
     <ScrollView>
     <View style={styles.container}>
-    <Card mode="outlined"  style={styles.card}>
+    <Card mode="elevated" elevation={4} style={styles.card}>
       <Card.Cover source={{uri: image}} />
       <Card.Title
         title={name}

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getData, storeData } from "../storageControllers";
 
 const initialState = {
-  value: [],
+  favourites: [],
 };
 
 export const favouritesSlice = createSlice({

@@ -1,11 +1,13 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { Avatar, Card, Button } from "react-native-paper";
+import { Avatar, Card, Button, useTheme } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { deleteFav } from "../../features/favouritesSlice";
 import { useDispatch } from "react-redux";
 
-const FavouriteCard = ({ name, image, id }) => {
+const FavouriteCard = ({ name, image, id}) => {
+
+  const theme = useTheme()
   
   const navigation = useNavigation();
 
@@ -53,11 +55,13 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     alignItems: "center",
+    
   },
   card: {
     width: "95%",
     marginVertical: 2,
     display: "flex",
     flexDirection: "row-reverse",
+    
   },
 });

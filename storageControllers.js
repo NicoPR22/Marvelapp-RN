@@ -27,3 +27,22 @@ export const  getData = async () => {
       console.log(error)
     }
   }
+
+  export const storeThemeMode = async (value) => {
+    try {
+      await AsyncStorage.setItem('@theme', value)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  export const getThemeMode = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@theme')
+      if(value !== null) {
+        return value
+      }else return true
+    } catch(e) {
+      console.log(e)
+    }
+  }

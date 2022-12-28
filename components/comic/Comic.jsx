@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, StyleSheet, FlatList } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    margin: 20
+    margin: 20,
   },
   image: {
     width: 200,

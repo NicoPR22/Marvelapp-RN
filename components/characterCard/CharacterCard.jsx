@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import { resetFavs } from "../../features/favouritesSlice";
-import { Surface, Modal } from "react-native-paper";
+import { Surface, Modal, useTheme } from "react-native-paper";
 
 export default function CharacterCard({ image, name, id, isFav }) {
   const [visible, setVisible] = React.useState(false);
@@ -14,6 +14,8 @@ export default function CharacterCard({ image, name, id, isFav }) {
   const dispatch = useDispatch();
 
   const nameShort = name.length > 22 ? name.substring(0, 22) + "..." : name;
+
+  const theme = useTheme()
 
   const handleOnPress = () => {
     if (!isFav) {
@@ -25,16 +27,17 @@ export default function CharacterCard({ image, name, id, isFav }) {
     }
   };
 
+
   return (
     <Surface style={styles.surface} elevation={4}>
-      <View style={styles.container}>
+     
         <TouchableOpacity
           style={styles.imageContainer}
           onPress={() => navigation.navigate(`Detail`, { id: id })}
         >
           <Image style={styles.caracterImage} source={{ uri: image }} />
         </TouchableOpacity>
-        <Text style={styles.name}>
+        <Text style={[{color:theme.colors.text},styles.name]}>
           {name.length > 22 ? name.substring(0, 21) + "..." : name}{" "}
         </Text>
         <MaterialCommunityIcon
@@ -49,11 +52,11 @@ export default function CharacterCard({ image, name, id, isFav }) {
           visible={visible}
           contentContainerStyle={{ width: "95%", height: "20%" }}
         >
-          <Text style={{ color: "white", textAlign: "center", fontSize: 20 }}>
+          <Text style={{ color:theme.colors.text, textAlign: "center", fontSize: 20 }}>
             Character has been added to your favourites.
           </Text>
         </Modal>
-      </View>
+    
     </Surface>
   );
 }
@@ -68,18 +71,8 @@ const styles = StyleSheet.create({
     width: "95%",
     alignSelf: "center",
     overflow: "hidden",
-    backgroundColor: "white",
-  },
-  container: {
-    borderRadius: 5,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 5,
-    width: "100%",
-    alignSelf: "center",
-    overflow: "hidden",
-    backgroundColor: "white",
+    paddingTop:10
+    
   },
   name: {
     fontSize: 24,
@@ -88,19 +81,17 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    borderBottomWidth:1,
-    borderBottomColor:'#ecf5f5'
   },
   caracterImage: {
     width: "100%",
     height: 300,
-
-    resizeMode: "cover",
+    resizeMode: "contain",
+   
   },
   heart: {
     display: "flex",
     position: "absolute",
-    top: "92%",
+    top: "94%",
     left: "90%",
   },
 });

@@ -1,126 +1,88 @@
 import * as React from "react";
 import { View, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import CharacterCard from "../characterCard/CharacterCard";
-import apiParams from "../../config";
-import axios from "axios";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, useTheme } from "react-native-paper";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector, useDispatch } from "react-redux";
-import { getFavourites } from "../../features/favouritesSlice";
+import {
+  getFavourites,
+  selectFavourites,
+} from "../../features/favouritesSlice";
 import Pagination from "./Pagination";
+import {
+  searchAllCharacters,
+  searchCharacter,
+} from "../../features/charactersSlice";
 
+export default function Home() {
+  const dispatch = useDispatch();
 
+  const theme = useTheme();
 
-export default function Home(props) {
+  const isLoading = useSelector((state) => state.characters.isLoading);
+  const data = useSelector((state) => state.characters.characters);
+  const [search, setSearch] = React.useState("");
+  const favourites = useSelector((state) => state.favourites.value);
 
-  const dispatch = useDispatch()
-  
   React.useEffect(() => {
-    dispatch(getFavourites())
-    searchAllCharacters()
+    dispatch(getFavourites());
+    dispatch(searchAllCharacters());
   }, []);
 
-  const [isLoading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState([]);
-  const [total, setTotal] = React.useState(0);
-  const { ts, apikey, hash, baseURL } = apiParams;
-  const [search, setSearch] = React.useState("");
-  const [offSet, setOffSet] = React.useState(0);
-  const favourites = useSelector((state)=> state.favourites.value);7
-
-  const searchAllCharacters = () => {
-    axios
-      .get(`${baseURL}/v1/public/characters?offset=${offSet}`, {
-        params: {
-          ts,
-          apikey,
-          hash,
-        },
-      })
-      .then((response) => {
-      setData(response.data.data.results)
-      setTotal(response.data.data.total)
-      })
-      .catch((error) => console.log(error))
-      .finally(() => {
-        setLoading(false);
-        search ? setSearch("") : null
-      });
-  };
-
-
-  function searchCharacter() {
-    if (search) {
-      setLoading(true);
-      axios
-        .get(`${baseURL}/v1/public/characters`, {
-          params: {
-            ts,
-            apikey,
-            hash,
-            nameStartsWith: search,
-          },
-        })
-        .then((response) => setData(response.data.data.results))
-        .catch((error) => console.error(error))
-        .finally(() => {
-          setLoading(false)
-        });
-    }
+  const handleOnPress = ()=> {
+    setSearch("") 
+    dispatch(searchAllCharacters())
   }
 
-  const handlePageChange = (number)=> {
-      setOffSet(number);
-      searchAllCharacters()
+  const handleSearch = ()=> {
+    dispatch(searchCharacter(search))
   }
 
   return (
-    <View style={{ display: "flex", flex: 1, backgroundColor: "#ecf5f5" }}>
-      <View
-        style={styles.container}
-      >
+    <View style={{ display: "flex", flex: 1, marginTop: 5 }}>
+      <View style={styles.container}>
         <Searchbar
-          style={{ width: "95%", backgroundColor: "lightgrey", marginTop:5, height:35, borderRadius: 20}}
-          placeholder="Search for character..."
+          style={{ width: "100%" }}
+          placeholder="Look for a character..."
           onChangeText={(value) => setSearch(value)}
           value={search}
-          onIconPress={searchCharacter}
-          onSubmitEditing={searchCharacter}
+          onIconPress= {handleSearch}
+          onSubmitEditing= {handleSearch}
           clearIcon={() =>
             search ? (
               <MaterialCommunityIcon
                 name="broom"
                 size={25}
-                onPress={searchAllCharacters}
+                onPress= {handleOnPress}
+                color={theme.colors.text}
               />
             ) : null
           }
         />
-        {!search ? <Pagination total={total/20} change={handlePageChange} page={offSet} /> : null}
+
+        {!search ? <Pagination /> : null}
       </View>
       {isLoading ? (
         <ActivityIndicator size="large" color="#00ff00" />
       ) : (
         <FlatList
-          style={{ flex: 1, backgroundColor:'#ecf5f5' }}
+          style={{ flex: 1 }}
           data={data}
           keyExtractor={({ id }) => id.toString()}
           refreshing={false}
           renderItem={({ item }) => (
             <>
               <CharacterCard
-                {...props}
                 key={item.id}
                 id={item.id}
                 image={`${item?.thumbnail?.path}.${item?.thumbnail.extension}`}
                 name={item.name}
-                isFav={favourites?.some(f=> f.id === item.id)}
+                isFav={favourites?.some((f) => f.id === item.id)}
               />
             </>
           )}
         />
-      )
-      }
+      )}
     </View>
   );
 }
@@ -133,6 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     marginBottom: 10,
-    marginTop: 5,
-  }
+  },
 });
+
+
