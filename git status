@@ -1,0 +1,42 @@
+[33mcommit c6c8931f8386b2143860ee06594bca9b4c63a0da[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 06be786 8aa56a5
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Wed Dec 28 17:00:44 2022 -0300
+
+    Merge branch 'main' of https://github.com/NicoPR22/Marvel-App-React-Native
+
+[33mcommit 06be786e0f33212164b3466676b0f1d26398a3bb[m
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Wed Dec 28 16:57:47 2022 -0300
+
+    darkmode and more
+
+[33mcommit 8aa56a5cef1a4d4989e9847539d0522d57110267[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Nicolas <90477354+NicoPR22@users.noreply.github.com>
+Date:   Mon Dec 12 17:37:48 2022 -0300
+
+    Delete .env
+
+[33mcommit bff28c7817ceabd90487dabd5166b0a25b6fb6c9[m
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Mon Dec 12 17:35:12 2022 -0300
+
+    xxi
+
+[33mcommit ef196e35e56a4132f7d93cb359201fb0ab5d66e9[m
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Mon Dec 12 17:31:14 2022 -0300
+
+    xxx
+
+[33mcommit 67887f04781f695f0cc6fbfbc5ceb11d522ce980[m
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Mon Nov 21 12:54:04 2022 -0300
+
+    first commit
+
+[33mcommit 2372bafd25f33be2313fe9847c437542920703c3[m
+Author: NicoPR22 <nicolasexeburgos@gmail.com>
+Date:   Tue Sep 20 12:06:49 2022 -0300
+
+    Created a new Expo app
